@@ -6,3 +6,12 @@ a3ee3a70-38a5-49b1-86e5-eae5e48acc40:1760557927023:24:S:EXECUTE save_customer(1,
 2fe4d5c7-198c-48d3-90f5-0036876bb945:1760558684887:17:S:EXECUTE save_customer(2,'Antonia',33,'Mazatlan #69',200.0);
 20425048-e642-447a-a535-3d17902d2ca5:1760558699317:7:F:select * from customers;
 122395cf-64bb-4eed-aaae-ea8736ca8f42:1760560191733:0:F:git status
+81e85110-ca1f-4b4e-a285-c5a6ba90c24a:1760561423823:48:F:CREATE OR REPLACE FUNCTION totalCustomers \nRETURN number IS \n   total number(2) := 0; \nBEGIN \n   SELECT count(*) into total \n   FROM customers; \n    \n   RETURN total; \nEND; \n/
+5ee6e2bd-e84e-4775-9e62-3a92762cad68:1760561526206:0:F:execute totalCustomers;
+282b11bd-275f-4f30-8dea-934bc27752c1:1760561633207:165:F:select totalCustomers() from customers;
+06de0592-0ddc-4bd6-b3e4-e01318d586dc:1760561770503:9:F:CREATE OR REPLACE FUNCTION totalCustomers \nRETURN number IS \n   total number(2) := 0; \nBEGIN \n   SELECT count(*) into total \n   FROM customers; \n    \n   RETURN total; \nEND; \n/
+81a1c3b6-5b9c-4260-9761-5f198f42fc95:1760561776283:8:F:select totalCustomers() from customers;
+4ba5dd52-afd1-4135-a9d7-53987b4196bd:1760561887268:14:F:select totalCustomers() from dual;
+27533e3f-f81e-4c41-94d0-e805b8b320d3:1760562054557:225:F:desc dual;
+fab3ea3e-baff-4f62-9fd6-93e6a59b18f8:1760562294884:44:F:CREATE OR REPLACE FUNCTION total_clientes\n    RETURN NUMBER IS\n    totalClientes NUMBER(2);\nBEGIN\n    SELECT COUNT(*) INTO totalClientes FROM customers;\n    RETURN totalClientes;\n\nEND total_clientes;\n/
+e387ee12-3688-4790-85e3-9536b1e4515d:1760562330015:78:F:select total_clientes()  from dual;
