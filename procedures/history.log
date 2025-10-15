@@ -1,0 +1,8 @@
+fc2f0c46-06cc-4e66-8c19-25c589a87380:1760556505148:40:F:select * from customers;
+278c6d2e-66bb-40e5-af98-ee10bc430932:1760557863364:37:F:CREATE OR REPLACE PROCEDURE save_customer(\n    c_id IN customers.id%TYPE,\n    c_name IN customers.name%TYPE,\n    c_age IN customers.age%TYPE,\n    c_address IN customers.address%TYPE,\n    c_salary IN customers.salary%TYPE)\nIS\nBEGIN\n\n    INSERT INTO customers(id,name,age,address,salary) VALUES(c_id,c_name,c_age,c_address,c_salary);\n    COMMIT;\n\nEXCEPTION\n    WHEN OTHERS THEN\n        ROLLBACK;\n        RAISE_APPLICATION_ERROR(-20001, 'Error intertar guardar el empleado' || SQLERRM);\n\nEND save_customer;\n/
+a3ee3a70-38a5-49b1-86e5-eae5e48acc40:1760557927023:24:S:EXECUTE save_customer(1,'Antonio',30,'Mazatlan #69',100.0);
+816d878d-55d5-4055-8e4f-de259f3a11ab:1760557945944:6:F:select * from customers;
+47d1a1a8-b2fa-4564-92fc-3405ac83ed90:1760558346640:0:F:EXECUTE save_customer(1,'Antonio',30,'Mazatlan #69',100.0);
+2fe4d5c7-198c-48d3-90f5-0036876bb945:1760558684887:17:S:EXECUTE save_customer(2,'Antonia',33,'Mazatlan #69',200.0);
+20425048-e642-447a-a535-3d17902d2ca5:1760558699317:7:F:select * from customers;
+122395cf-64bb-4eed-aaae-ea8736ca8f42:1760560191733:0:F:git status
