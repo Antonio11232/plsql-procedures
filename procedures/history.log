@@ -15,3 +15,28 @@ a3ee3a70-38a5-49b1-86e5-eae5e48acc40:1760557927023:24:S:EXECUTE save_customer(1,
 27533e3f-f81e-4c41-94d0-e805b8b320d3:1760562054557:225:F:desc dual;
 fab3ea3e-baff-4f62-9fd6-93e6a59b18f8:1760562294884:44:F:CREATE OR REPLACE FUNCTION total_clientes\n    RETURN NUMBER IS\n    totalClientes NUMBER(2);\nBEGIN\n    SELECT COUNT(*) INTO totalClientes FROM customers;\n    RETURN totalClientes;\n\nEND total_clientes;\n/
 e387ee12-3688-4790-85e3-9536b1e4515d:1760562330015:78:F:select total_clientes()  from dual;
+fa5fe79a-2ba3-4b5b-b95c-2e40e2cf5bb4:1760564349570:38:F:CREATE OR REPLACE FUNCTION total_clientes\n    RETURN NUMBER IS\n    totalClientes NUMBER(2);\nBEGIN\n    SELECT COUNT(*) INTO totalClientes FROM customers;\n    RETURN totalClientes;\n\n\nEND total_clientes;\n/
+6d0e3b6d-405e-455a-a5a9-a252171d8305:1760564366583:8:F:select * from customers;
+d075da84-76b8-4a2f-9c5b-bd556842a721:1760564968342:29:F:DECLARE  \n   total_rows number(2); \nBEGIN \n   UPDATE customers \n   SET salary = salary + 500; \n   IF sql%notfound THEN \n      dbms_output.put_line('no customers selected'); \n   ELSIF sql%found THEN \n      total_rows := sql%rowcount;\n      dbms_output.put_line( total_rows || ' customers selected '); \n   END IF;  \nEND; \n/
+be5fb94e-2bda-4541-b305-6f51a2b38d34:1760564990635:5:F:select * from customers;
+9e48ab3f-88ac-489f-988c-8075c6f88547:1760565059248:0:S:set SERVEROUTPUT on;
+67c75d4a-9084-4b29-969d-c2a0bf031dd2:1760565059547:6:F:DECLARE  \n   total_rows number(2); \nBEGIN \n   UPDATE customers \n   SET salary = salary + 500; \n   IF sql%notfound THEN \n      dbms_output.put_line('no customers selected'); \n   ELSIF sql%found THEN \n      total_rows := sql%rowcount;\n      dbms_output.put_line( total_rows || ' customers selected '); \n   END IF;  \nEND; \n/
+1513a950-1135-4f42-a936-ece9d4b93b31:1760565074473:8:F:select * from customers;
+e527544a-1fa1-4d0f-9a70-ef6b6584a015:1760565523540:0:S:set SERVEROUTPUT on;
+a5a613f9-12b9-42be-a1cf-42cf8b17e827:1760565523839:23:F:DECLARE  \n   total_rows number(2); \nBEGIN\n    \n   UPDATE customers SET salary = salary + 500 WHERE id = 3; \n\n   IF sql%notfound THEN \n      dbms_output.put_line('no customers selected'); \n   ELSIF sql%found THEN \n      total_rows := sql%rowcount;\n      dbms_output.put_line( total_rows || ' customers selected '); \n   END IF;  \nEND; \n/
+31d6905f-822a-47a9-9620-78cc1ff9b65a:1760565971049:56:F:SELECT * FROM CUSTOMERS;
+4efe553a-fcfa-475c-b695-fd3a441efc01:1760565975419:0:S:set SERVEROUTPUT on;
+6c570596-ce4e-4691-812c-644e08a143d1:1760565984562:25:F:DECLARE\n    filasAfectadas number;\nBEGIN\n    UPDATE customers SET SALARY = 100.0; -- Se crea un cursor implicito 'SQL'\n\n    IF SQL%NOTFOUND THEN\n        DBMS_OUTPUT.PUT_LINE('No se encontraron coincidencias.');\n    ELSE\n        filasAfectadas := SQL%ROWCOUNT;\n        DBMS_OUTPUT.PUT_LINE('No se encontraron coincidencias.');\n    END IF;\nEND;\n/
+f5d7f89d-f5c3-4092-979d-cedfe999e007:1760565993937:0:S:set SERVEROUTPUT on;
+a41eaff9-9feb-480a-8bab-249435c4c817:1760565994202:11:F:DECLARE\n    filasAfectadas number;\nBEGIN\n    UPDATE customers SET SALARY = 100.0; -- Se crea un cursor implicito 'SQL'\n\n    IF SQL%NOTFOUND THEN\n        DBMS_OUTPUT.PUT_LINE('No se encontraron coincidencias.');\n    ELSE\n        filasAfectadas := SQL%ROWCOUNT;\n        DBMS_OUTPUT.PUT_LINE('No se encontraron coincidencias.');\n    END IF;\nEND;\n/
+86748f58-bb6b-4868-b52e-1a861c0f14c1:1760566004647:9:F:SELECT * FROM CUSTOMERS;
+76828991-6fa8-472d-a231-a57f7c468c17:1760566069608:0:S:set SERVEROUTPUT on;
+4595d0c1-b08d-4954-940e-d25b26b4556a:1760566069877:9:F:DECLARE\n    filasAfectadas number;\nBEGIN\n    UPDATE customers SET SALARY = 100.0; -- Se crea un cursor implicito 'SQL'\n\n    IF SQL%NOTFOUND THEN\n        DBMS_OUTPUT.PUT_LINE('No se encontraron coincidencias.');\n    ELSE\n        filasAfectadas := SQL%ROWCOUNT;\n        DBMS_OUTPUT.PUT_LINE('FILAS AFECTADAS: ' || filasAfectadas);\n    END IF;\nEND;\n/
+12412b02-8771-4808-875b-a8e740b2cc42:1760566123581:0:F:INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) \nVALUES (1, 'Ramesh', 32, 'Ahmedabad', 2000.00 );
+3b946381-0354-4291-b07b-79ad32e99619:1760566138004:0:F:INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) \nVALUES (2, 'Ramesh', 32, 'Ahmedabad', 2000.00 );
+583f8839-02e8-45a3-a702-32054ce52549:1760566174587:0:F:INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) \nVALUES (2, 'Ramesh', 32, 'Ahmedabad', 2000.00 );
+fb918338-0c8e-4e77-8b9c-a743c54c8137:1760566195738:0:F:INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) VALUES (2, 'Ramesh', 32, 'Ahmedabad', 2000.00 );
+39ce1196-b8d7-4de6-a7f5-d99d16866329:1760566218619:11:F:INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) VALUES (3, 'Ramesh', 32, 'Ahmedabad', 2000.00 );
+fee35ea3-209e-453f-bb0a-41ca9152fa19:1760566232195:9:F:SELECT * FROM CUSTOMERS;
+9c1f6a4a-0e39-460f-93ad-0fc6c065ee3c:1760566241158:0:S:set SERVEROUTPUT on;
+ef6bae99-1255-4202-abb9-3d465333255a:1760566241454:6:F:DECLARE\n    filasAfectadas number;\nBEGIN\n    UPDATE customers SET SALARY = 100.0; -- Se crea un cursor implicito 'SQL'\n\n    IF SQL%NOTFOUND THEN\n        DBMS_OUTPUT.PUT_LINE('NO SE ENCONTRARON COINCIDENCIAS.');\n    ELSE\n        filasAfectadas := SQL%ROWCOUNT;\n        DBMS_OUTPUT.PUT_LINE('FILAS AFECTADAS: ' || filasAfectadas);\n    END IF;\nEND;\n/
