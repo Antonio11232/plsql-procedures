@@ -13,9 +13,8 @@ BEGIN
 EXCEPTION 
    WHEN NO_DATA_FOUND THEN 
       dbms_output.put_line('Recurso no encontrado!'); 
-    WHEN INVALID_NUMBER THEN 
-      dbms_output.put_line('Favor de verificar el tipo de dato!'); 
    WHEN others THEN 
-      dbms_output.put_line('Error inesperado!'); 
+      DBMS_OUTPUT.PUT_LINE('Codigo de error: ' || SQLCODE);
+      DBMS_OUTPUT.PUT_LINE('Mensaje: ' || SQLERRM);
 END; 
 /
