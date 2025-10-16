@@ -26,3 +26,13 @@ VALUES (5, 'Hardik', 27, 'Bhopal', 8500.00 );
 
 INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
 VALUES (6, 'Komal', 22, 'MP', 4500.00 ); 
+
+CREATE TABLE salary_audit (
+    audit_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id   NUMBER,
+    old_salary    NUMBER,
+    new_salary    NUMBER,
+    changed_by    VARCHAR2(30),
+    changed_on    DATE,
+    action_type   VARCHAR2(10)
+);

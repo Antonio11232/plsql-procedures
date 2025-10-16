@@ -1,0 +1,18 @@
+508d5991-4ed2-424e-b333-7f4c000ac6c7:1760585927894:27:S:CREATE TABLE salario_auditoria (\n    audit_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n    customer_id   NUMBER,\n    old_salary    NUMBER,\n    new_salary    NUMBER,\n    changed_by    VARCHAR2(30),\n    changed_on    DATE,\n    action_type   VARCHAR2(10)\n);
+d4c0c242-c0ef-42fe-8f07-2a2121924dab:1760585927976:0:F:/
+6e898c6d-7917-4775-b85d-81e9b165aef9:1760586001247:0:F:CREATE TABLE salario_auditoria (\n    audit_id      NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n    customer_id   NUMBER,\n    old_salary    NUMBER,\n    new_salary    NUMBER,\n    changed_by    VARCHAR2(30),\n    changed_on    DATE,\n    action_type   VARCHAR2(10)\n);
+4b552048-ca93-4a23-9338-fa57360905c8:1760586001311:0:F:/
+52421913-302f-4dc3-93ba-5aff448b5345:1760586021581:39:S:select * from salario_auditoria;
+bde6454b-7459-4782-8763-ac060adb58da:1760586043212:6:S:select * from salario_auditoria;
+d621afcb-e331-4a43-a50c-e24c232e2d51:1760586054476:220:S:desc salario_auditoria;
+63c90169-ea79-467f-8950-0cd7165fd8ed:1760587425952:160:F:CREATE OR REPLACE TRIGGER trg_salario_auditoria\nAFTER INSERT OR UPDATE OR DELETE ON customers\nFOR EACH ROW\n\nDECLARE\n    v_action VARCHAR2(20);\nBEGIN\n        \n    IF INSERTING THEN\n      v_action := "INSERT";\n    ELSIF UPDATING THEN\n      v_action := "UPDATE";\n    ELSE\n      v_action := "DELETE";\n    END IF;\n\n    INSERT INTO salario_auditoria\n        (\n        customer_id,\n        old_salary,\n        new_salary,\n        changed_by,\n        changed_on,\n        action_type\n        )\n        VALUES\n        (\n            NVL(:OLD.ID, :NEW.ID),\n            :OLD.SALARY,\n            :NEW.SALARY,\n            USER,\n            SYSDATE,\n            v_action\n\n        );\n\nEND;\n/
+227081e2-6e23-445d-9569-4dfa5e3ae25c:1760587474613:41:F:CREATE OR REPLACE TRIGGER trg_salario_auditoria\nAFTER INSERT OR UPDATE OR DELETE ON customers\nFOR EACH ROW\n\nDECLARE\n    v_action VARCHAR2(20);\nBEGIN\n        \n    IF INSERTING THEN\n      v_action := 'INSERT';\n    ELSIF UPDATING THEN\n      v_action := 'UPDATE';\n    ELSE\n      v_action := 'DELETE';\n    END IF;\n\n    INSERT INTO salario_auditoria\n        (\n        customer_id,\n        old_salary,\n        new_salary,\n        changed_by,\n        changed_on,\n        action_type\n        )\n        VALUES\n        (\n            NVL(:OLD.ID, :NEW.ID),\n            :OLD.SALARY,\n            :NEW.SALARY,\n            USER,\n            SYSDATE,\n            v_action\n\n        );\n\nEND;\n/
+9bc5f7bc-6cc1-40d7-81bb-67cef1dc5eaa:1760587527598:25:F:INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) \nVALUES (10, 'Ramesh', 32, 'Ahmedabad', 2000.00 );
+7ccde1a0-23c2-4e8a-8310-0de67ca9e074:1760587539820:65:F:select * from customers;
+3ea9e1ad-cb33-429a-9f40-f79c41dca638:1760587556405:72:F:select * from salario_auditoria;
+c451b433-7829-42d2-9762-762d353c0385:1760587595821:16:F:UPDATE customers\nSET salary = salary + 500\nWHERE id = 10;
+03f9a882-1cea-497d-bd5f-2042b5f589f4:1760587607566:8:F:select * from customers;
+ed77b8a8-d9e1-47fe-bb12-f40f6645d5c6:1760587623265:8:F:select * from salario_auditoria;
+b5c4d222-1c67-451c-a56f-a63364bd53da:1760587682274:9:F:DELETE FROM customers WHERE id = 10;
+747a1d8a-46ef-4e33-baba-f26502f402a2:1760587696803:8:F:select * from customers;
+70aa1afd-9952-4621-b183-e279fbef410d:1760587707010:9:F:select * from salario_auditoria;

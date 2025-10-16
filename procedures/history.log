@@ -75,3 +75,46 @@ fc80042c-12f9-4050-bcbe-1240b12bab4d:1760581430065:15:F:DECLARE \n    id_text VA
 56594405-ec33-41b7-a09b-1ce2dcbf6083:1760581477350:11:F:DECLARE \n    id_text VARCHAR2(2) := 'uu';\n    c_id customers.ID%TYPE;\n   c_name customers.name%type;\n   c_addr customers.address%type; \nBEGIN \n    c_id := TO_NUMBER(id_text);\n\n   SELECT  name, address INTO  c_name, c_addr \n   FROM customers \n   WHERE id = c_id;  \n   DBMS_OUTPUT.PUT_LINE ('Name: '||  c_name ||', Address: ' || c_addr); \nEXCEPTION \n   WHEN NO_DATA_FOUND THEN \n      dbms_output.put_line('Recurso no encontrado!'); \n   WHEN INVALID_NUMBER THEN \n      dbms_output.put_line('Favor de verificar el tipo de dato!'); \n   WHEN others THEN \n      DBMS_OUTPUT.PUT_LINE('Codigo de error: ' || SQLCODE);\n        DBMS_OUTPUT.PUT_LINE('Mensaje: ' || SQLERRM);\nEND; \n/
 37724aaa-772e-42ef-bc9c-2bdc9d830c0d:1760581512285:12:F:DECLARE \n    id_text VARCHAR2(2) := 'u';\n    c_id customers.ID%TYPE;\n   c_name customers.name%type;\n   c_addr customers.address%type; \nBEGIN \n    c_id := TO_NUMBER(id_text);\n\n   SELECT  name, address INTO  c_name, c_addr \n   FROM customers \n   WHERE id = c_id;  \n   DBMS_OUTPUT.PUT_LINE ('Name: '||  c_name ||', Address: ' || c_addr); \nEXCEPTION \n   WHEN NO_DATA_FOUND THEN \n      dbms_output.put_line('Recurso no encontrado!'); \n   WHEN INVALID_NUMBER THEN \n      dbms_output.put_line('Favor de verificar el tipo de dato!'); \n   WHEN others THEN \n      DBMS_OUTPUT.PUT_LINE('Codigo de error: ' || SQLCODE);\n      DBMS_OUTPUT.PUT_LINE('Mensaje: ' || SQLERRM);\nEND; \n/
 556851f3-b5e1-4596-93e4-bd9bc95fe828:1760581558927:12:F:DECLARE \n    id_text VARCHAR2(2) := 'u';\n    c_id customers.ID%TYPE;\n   c_name customers.name%type;\n   c_addr customers.address%type; \nBEGIN \n    c_id := TO_NUMBER(id_text);\n\n   SELECT  name, address INTO  c_name, c_addr \n   FROM customers \n   WHERE id = c_id;  \n   DBMS_OUTPUT.PUT_LINE ('Name: '||  c_name ||', Address: ' || c_addr); \nEXCEPTION \n   WHEN NO_DATA_FOUND THEN \n      dbms_output.put_line('Recurso no encontrado!'); \n   WHEN others THEN \n      DBMS_OUTPUT.PUT_LINE('Codigo de error: ' || SQLCODE);\n      DBMS_OUTPUT.PUT_LINE('Mensaje: ' || SQLERRM);\nEND; \n/
+b3a9aa1b-199e-4587-a8f4-1a62bb6dc99d:1760582422127:13:F:select * from customers;
+477d27b6-9029-46ad-8fca-78c7d5393139:1760582475701:184:F:CREATE OR REPLACE TRIGGER display_salary_changes \nBEFORE DELETE OR INSERT OR UPDATE ON customers \nFOR EACH ROW \nWHEN (NEW.ID > 0) \nDECLARE \n   sal_diff number; \nBEGIN \n   sal_diff := :NEW.salary  - :OLD.salary; \n   dbms_output.put_line('Old salary: ' || :OLD.salary); \n   dbms_output.put_line('New salary: ' || :NEW.salary); \n   dbms_output.put_line('Salary difference: ' || sal_diff); \nEND; \n/
+9c1eead8-9aa8-4163-a519-9f20d13d1ee3:1760582495430:0:S:SET SERVEROUTPUT ON;
+4a877ece-4451-438f-aaa6-382c44095bb9:1760582495973:92:F:CREATE OR REPLACE TRIGGER display_salary_changes \nBEFORE DELETE OR INSERT OR UPDATE ON customers \nFOR EACH ROW \nWHEN (NEW.ID > 0) \nDECLARE \n   sal_diff number; \nBEGIN \n   sal_diff := :NEW.salary  - :OLD.salary; \n   dbms_output.put_line('Old salary: ' || :OLD.salary); \n   dbms_output.put_line('New salary: ' || :NEW.salary); \n   dbms_output.put_line('Salary difference: ' || sal_diff); \nEND; \n/
+3698e2d4-8508-4883-860e-f1274dc5294c:1760582548319:20:F:INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) \nVALUES (7, 'Kriti', 22, 'HP', 7500.00 );/
+cccc508e-1f10-4875-a69d-03ea7412a0ac:1760582577057:0:F:INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) \nVALUES (7, 'Kriti', 22, 'HP', 500.00 );/
+cd739b3b-1b64-46b0-8907-8b34f1ce0302:1760582601518:10:F:UPDATE customers \nSET salary = salary + 500 \nWHERE id = 2;
+7f6d8adb-e3e5-43c3-988c-b6a365ae6df4:1760582601569:4:F:/
+2c34cb1a-640f-4f08-b9eb-87acacad3290:1760582641539:10:F:UPDATE customers \nSET salary = salary + 500 \nWHERE id = 7;
+edfa3668-81be-4570-8ad2-dc3ba6772c48:1760582641588:5:F:/
+5f184947-65e2-4f28-9b85-3287a07c0540:1760582664489:14:F:select * from customers;
+d096646c-c9a2-4701-9421-f810661f7504:1760582684807:13:F:UPDATE customers \nSET salary = 0.0\nWHERE id = 7;
+4e547862-3acd-44fe-925f-7ddfaff3decf:1760582684866:4:F:/
+753667af-d4af-4301-ba02-4c1fe790e4f1:1760582703655:27:F:CREATE OR REPLACE TRIGGER display_salary_changes \nBEFORE DELETE OR INSERT OR UPDATE ON customers \nFOR EACH ROW \nWHEN (NEW.ID > 0) \nDECLARE \n   sal_diff number; \nBEGIN \n   sal_diff := :NEW.salary  - :OLD.salary; \n   dbms_output.put_line('Old salary: ' || :OLD.salary); \n   dbms_output.put_line('New salary: ' || :NEW.salary); \n   dbms_output.put_line('Salary difference: ' || sal_diff); \nEND; \n/
+a844cfc2-1ce5-40a1-87d9-e63b973694bb:1760582986020:15:F:select * from customers;
+2f2055b0-7eff-44da-a3b5-bea6f143bbb8:1760583003826:12:F:UPDATE customers \nSET salary = salary + 500 \nWHERE id = 7;
+026dab45-a5e2-4a7c-a2d1-fbf5ccff5101:1760583003882:10:F:/
+d634521c-bf64-44ac-add5-e6b058ff5150:1760583030900:9:F:select * from customers;
+f8ee191e-bbe5-40f7-b9d2-fe9940f8b1c3:1760583131791:31:F:CREATE OR REPLACE TRIGGER display_salary_changes \nBEFORE DELETE OR INSERT OR UPDATE ON customers \nFOR EACH ROW \nWHEN (NEW.ID > 0) \nDECLARE \n   sal_diff number; \nBEGIN \n   --sal_diff := :NEW.salary  - :OLD.salary; \n   dbms_output.put_line('Old salary: ' || :OLD.salary); \n   dbms_output.put_line('New salary: ' || :NEW.salary); \n   --dbms_output.put_line('Salary difference: ' || sal_diff); \nEND; \n/
+ab86128d-0fda-4411-9691-6cea3e450bd5:1760583156941:11:F:UPDATE customers \nSET salary = salary + 500 \nWHERE id = 7;
+8d658976-3e6f-4399-ab22-538504bf9e26:1760583223388:15:F:select * from customers;
+eaad9070-3824-4f87-9b86-386d9eca01e2:1760583249095:10:F:UPDATE customers \nSET salary = 0 \nWHERE id = 7;
+1f885f17-09e0-41ad-9fcd-3fce024182b4:1760583257240:9:F:select * from customers;
+ddbfe326-b21a-4aab-881c-eb9f85f675d6:1760583282782:6:F:UPDATE customers \nSET salary = 0 \nWHERE id = 7;
+063c291c-8363-4ba1-925f-d7e869a95a35:1760583295993:8:F:select * from customers;
+99bdb3c5-42ae-482e-a0a7-3412d2ff63e3:1760583310588:9:F:UPDATE customers \nSET salary = 100 \nWHERE id = 7;
+ea98f1a9-9fef-45a2-89d0-33cad87c4c3e:1760583327689:8:F:select * from customers;
+d48e9855-5450-4546-9461-aec5f269de75:1760583356349:5:F:UPDATE customers \nSET salary = salary + 500 \nWHERE id = 7;
+b91ecf54-12be-4308-9615-5dc9e5d63ad7:1760583367865:8:F:select * from customers;
+f0e3dc05-1840-45ea-a5cc-71c2491ef8f8:1760583388261:30:F:CREATE OR REPLACE TRIGGER display_salary_changes \nBEFORE DELETE OR INSERT OR UPDATE ON customers \nFOR EACH ROW \nWHEN (NEW.ID > 0) \nDECLARE \n   sal_diff number; \nBEGIN \n   sal_diff := :NEW.salary  - :OLD.salary; \n   dbms_output.put_line('Old salary: ' || :OLD.salary); \n   dbms_output.put_line('New salary: ' || :NEW.salary); \n   dbms_output.put_line('Salary difference: ' || sal_diff); \nEND; \n/
+03038a7f-bf76-4161-ab26-3f65afba20f2:1760583401091:11:F:select * from customers;
+6b0347f1-e92a-47ec-b40b-885e35d74358:1760583416137:11:F:UPDATE customers \nSET salary = salary + 500 \nWHERE id = 2;
+f3c24961-7d66-43a7-9c4f-41344db00c66:1760583424878:7:F:select * from customers;
+6cccc049-f631-4c41-a036-c313c2cae162:1760583446005:7:F:select * from customers;
+dcadfe70-1f8c-4f91-be17-ff8486aba5a6:1760583449023:9:F:UPDATE customers \nSET salary = salary + 500 \nWHERE id = 2;
+0c94849b-235e-48e4-97a0-45f2a1cb84df:1760583449068:5:F:/
+6795041d-f333-4880-83e2-84cf676d056d:1760583494522:18:F:CREATE OR REPLACE TRIGGER display_salary_changes \nBEFORE DELETE OR INSERT OR UPDATE ON customers \nFOR EACH ROW \nWHEN (NEW.ID > 0) \nDECLARE \n   sal_diff number; \nBEGIN \n   dbms_output.put_line('Old salary: ' || :OLD.salary); \n   dbms_output.put_line('New salary: ' || :NEW.salary); \n    sal_diff := :NEW.salary  - :OLD.salary;\n   dbms_output.put_line('Salary difference: ' || sal_diff); \nEND; \n/
+72ce6b72-0906-4d96-9996-6a42ae04805e:1760583529981:79:F:select * from customers;
+d3ad20d4-a905-4b39-8a08-328d67e671f3:1760583541618:16:F:UPDATE customers \nSET salary = salary + 500 \nWHERE id = 7;
+fc1a9f07-2792-4e20-86df-7212b46e3d0e:1760583551943:7:F:select * from customers;
+9da38627-7e6b-4fc5-9e59-a8a6661f893c:1760583567034:17:F:CREATE OR REPLACE TRIGGER display_salary_changes \nBEFORE DELETE OR INSERT OR UPDATE ON customers \nFOR EACH ROW \nWHEN (NEW.ID > 0) \nDECLARE \n   sal_diff number; \nBEGIN \n   sal_diff := :NEW.salary  - :OLD.salary; \n   dbms_output.put_line('Old salary: ' || :OLD.salary); \n   dbms_output.put_line('New salary: ' || :NEW.salary); \n   dbms_output.put_line('Salary difference: ' || sal_diff); \nEND; \n/
+e212b184-6e94-4762-b861-0d933c5ef269:1760583589891:11:F:select * from customers;
+1d9667e3-0779-4cc4-a8a9-a5c26221fd10:1760583593633:9:F:UPDATE customers \nSET salary = salary + 500 \nWHERE id = 7;
